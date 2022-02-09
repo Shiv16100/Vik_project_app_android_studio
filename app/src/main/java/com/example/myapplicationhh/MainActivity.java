@@ -1,5 +1,6 @@
 package com.example.myapplicationhh;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Handler;
+import android.util.Pair;
 import android.view.View;
 
 import androidx.navigation.NavController;
@@ -27,7 +29,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN = 5000;
+    private static int SPLASH_SCREEN = 7000;
 
     //Variables
      Animation  bottomanim, topanim;
@@ -58,9 +60,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(MainActivity.this, Dashboard2.class);
-                startActivity(intent);
-                finish();
-
+                Pair[] pairs = new Pair[2];
+                pairs[0]= new Pair<View, String>(image, "logo_image");
+                pairs[1]= new Pair<View, String>(logo, "logo_text");
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
+                startActivity(intent, options.toBundle());
             }
         }, SPLASH_SCREEN);
 
